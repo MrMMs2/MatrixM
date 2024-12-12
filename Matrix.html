@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Hacking Effect</title>
+    <style>
+        /* Full page setup */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            color: #00ff00; /* Green text color for Matrix effect */
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* The message at the center */
+        .message {
+            z-index: 100;
+            font-size: 40px;
+            color: #00ff00;
+            text-align: center;
+            opacity: 0;
+            animation: messageFade 5s ease-in-out infinite;
+        }
+
+        /* Message fade effect */
+        @keyframes messageFade {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* The Matrix code animation for the falling characters */
+        .matrix-dot {
+            position: absolute;
+            color: #00ff00;
+            font-size: 18px;
+            white-space: nowrap;
+            opacity: 0;
+            animation: fall 5s linear infinite;
+        }
+
+        /* The falling effect for the Matrix code */
+        @keyframes fall {
+            0% {
+                top: -20px;
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hacked Message -->
+    <div class="message">Hello, I am Mr M!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create the Matrix effect with random falling dots
+            const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            const numDots = 100;  // Total number of dots
+
+            for (let i = 0; i < numDots; i++) {
+                // Create a random dot
+                const dot = document.createElement('div');
+                dot.classList.add('matrix-dot');
+
+                // Randomize the character for each dot
+                dot.textContent = characters.charAt(Math.floor(Math.random() * characters.length));
+
+                // Randomize the initial position of each dot
+                const randomX = Math.random() * window.innerWidth;
+                const randomDelay = Math.random() * 5;  // Random delay to make it more natural
+                const randomDuration = 5 + Math.random() * 5; // Random duration for the fall
+
+                dot.style.left = randomX + 'px';
+                dot.style.animationDelay = randomDelay + 's';
+                dot.style.animationDuration = randomDuration + 's';
+
+                // Append the dot to the body
+                document.body.appendChild(dot);
+            }
+        });
+    </script>
+</body>
+</html>
